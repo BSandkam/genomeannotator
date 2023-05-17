@@ -5,11 +5,9 @@ process SATSUMA2_SATSUMASYNTENY2 {
     if (params.enable_conda) {
         exit 1, "Conda environments cannot be used when using this version of Satsuma2. Please use docker or singularity containers."
     }
-    else {
-        container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-            'https://depot.galaxyproject.org/singularity/satsuma2:20161123--h7d875b9_3':
-            'quay.io/biocontainers/satsuma2:20161123--h7d875b9_3' }"
-    }
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/satsuma2:20161123--h7d875b9_3':
+        'quay.io/biocontainers/satsuma2:20161123--h7d875b9_3' }"
 
     input:
     tuple val(meta),path(query),val(meta_t),path(target),path(target_gtf)
